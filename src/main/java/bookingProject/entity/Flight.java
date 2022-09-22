@@ -1,31 +1,37 @@
-package project.dao.entity;
+package bookingProject.entity;
 
-import project.dao.interfaces.Identifiable;
+import bookingProject.dao.Identifiable;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Flight implements Serializable, Identifiable {
-    private static final long serialVersionUID = 1L;
-    static long counter = 0;
-
     private final long id;
     private final String cityFrom;
     private final String cityTo;
     private final LocalDateTime date;
     private int seats;
 
+    static long counter = 0;
+
+    private static final long serialVersionUID = 1L;
+
     public Flight(String cityFrom, String cityTo, LocalDateTime date, int seats) {
         this(++counter, cityFrom, cityTo, date, seats);
+//    this.cityFrom = cityFrom;
+//    this.cityTo = cityTo;
+//    this.date = date;
+//    this.seats = seats;
+//    this.id = ++counter;
     }
 
     public Flight(long id, String cityFrom, String cityTo, LocalDateTime date, int seats) {
-        this.id = id;
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
         this.date = date;
         this.seats = seats;
+        this.id = id;
     }
 
     public static void setCounter(long counter) {
@@ -57,16 +63,12 @@ public class Flight implements Serializable, Identifiable {
         this.seats = seats;
     }
 
-    public String display() {
-        return String.format("" +
-                        "||=================================================================||\n" +
+    public String represent() {
+        return String.format("||=================================================================||\n" +
                         "||ID:%3d | %-10s -> %-10s : %10s : Seats: %3d||\n" +
-                        "||_________________________________________________________________||\n",
-                id,
-                cityFrom,
-                cityTo,
-                date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm")),
-                seats
-        );
+                        "||_________________________________________________________________||\n"
+                , id, cityFrom, cityTo, date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm")), seats);
     }
+
+
 }
